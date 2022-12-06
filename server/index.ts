@@ -1,6 +1,6 @@
 import express, { Express, Request, Response } from 'express';
 
-const PORT = 3000;
+const PORT = 7777;
 const app: Express = express();
 
 app.use(express.json());
