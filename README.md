@@ -9,8 +9,8 @@
 This App provides horoscope info for sun signs such as Lucky Number, Lucky Color, Mood, Color, Compatibility with other sun signs, description of a sign for that day, etc.
 
 ## Design Diagram
-<img width="400" alt="design_diagram" src="https://user-images.githubusercontent.com/32971892/205996503-57292df8-63a6-4c23-9830-92a2498b9998.png">
 
+<img width="400" alt="design_diagram" src="https://user-images.githubusercontent.com/32971892/205996503-57292df8-63a6-4c23-9830-92a2498b9998.png">
 
 ## Installation
 
