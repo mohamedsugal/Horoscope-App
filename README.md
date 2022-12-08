@@ -30,11 +30,13 @@ Similarly navigate to the client directory. It should have a README file with ho
 
 ## Code formatting
 
+### Visual Studio Code
+
 If you are using VS Code install Prettier from the Marketplace. However, if you are using IntelliJ or WebStorm download it from the Plugin store.
 
 VS Code required additional setup. First navigate to the root of the directory and follow the steps below:
 
-```sh
+```shell
 mkdir .vscode
 cd .vscode
 touch settings.json
@@ -64,3 +66,47 @@ Then open the `settings.json` file you created above and paste the following jso
   "prettier.singleQuote": true
 }
 ```
+
+Additionally, you need to create a file named `.prettierrc ` in both the `client` and `server` directories. 
+
+```shell
+cd client 
+touch .prettierrc
+```
+
+Similarly do the same thing in the `server` directory. Then paste this snippet into the file. 
+
+```json
+{
+    "singleQuote": true,
+    "printWidth": 200,
+    "proseWrap": "always",
+    "tabWidth": 4,
+    "useTabs": false,
+    "trailingComma": "none",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "semi": true
+}
+```
+
+### WebStorm 
+
+Code formatting in WebStorm is more straight-forward. It usually comes with `prettier` plugin installed. All you have 
+to do is navigate to `client` directory and install `prettier` package. 
+
+```shell
+cd client 
+npm install --save-dev --save-exact prettier
+```
+
+WebStorm automatically detects the installed package. Just follow these remaining few steps. 
+
+1. In the **Settings/Preferences** dialog (`⌘`), go to **Languages & Frameworks | JavaScript | Prettier**.
+2. From the Prettier package list, select the prettier installation to use.
+> Note: If you followed the standard installation procedure, WebStorm locates the prettier package itself and the field 
+> is filled in automatically.
+3. To run Prettier automatically against specific files, open the **Settings/Preferences** dialog (`⌘`), 
+go to **Languages & Frameworks | JavaScript | Prettier**, and use the **On code reformatting** and **On save** checkboxes 
+to specify the actions that will trigger Prettier.
+
