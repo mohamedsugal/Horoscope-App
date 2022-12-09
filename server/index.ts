@@ -5,7 +5,7 @@ const app: Express = express();
 
 app.use(express.json());
 
-app.post("/user", (req, res) => {
+app.post("/user", (req: Request, res: Response) => {
   console.log(req.body);
 });
 
