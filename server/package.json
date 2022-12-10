@@ -4,20 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf dist && npx tsc",
-    "prestart": "npm run build",
-    "start": "node dist/index.js",
-    "preserve": "npm run build",
-    "serve": "concurrently \"npx tsc -w\" \"nodemon dist/index.js\""
+    "start": "nodemon index.ts --watch server",
+    "proto:build": "cd proto; buf build; cd ..",
+    "codegen:buf": "cd proto; buf generate; cd .."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@grpc/grpc-js": "^1.8.0",
     "@types/express": "^4.17.14",
     "@types/node": "^18.11.10",
     "concurrently": "^7.6.0",
     "express": "^4.18.2",
+    "grpc_tools_node_protoc_ts": "^5.3.2",
+    "grpc-tools": "^1.12.3",
     "rimraf": "^3.0.2",
     "typescript": "^4.9.3"
   },

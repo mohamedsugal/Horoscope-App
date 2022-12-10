@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package services.horoscope.v1;
+
+service HoroscopeService {
+  rpc GetHoroscopeInfo(HoroscopeRequest) returns (HoroscopeResponse);
+}
+
+message HoroscopeRequest {
+  string name = 1;
+  string horoscope_sign = 2;
+}
+
+message HoroscopeResponse {
+  string name = 1;
+  string date_range = 2;
+  string current_date = 3;
+  string description = 4;
+  string compatibility = 5;
+  string mood = 6;
+  string color = 7;
+  int32 lucky_number = 8;
+  string lucky_time = 9;
+}

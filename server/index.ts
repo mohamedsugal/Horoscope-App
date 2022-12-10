@@ -1,14 +1,20 @@
-import express, { Express, Request, Response } from "express";
+import { credentials } from "@grpc/grpc-js";
+import { HoroscopeServiceClient } from "./generated-proto/services/horoscope/v1/horoscope_grpc_pb";
+import { HoroscopeRequest } from "./generated-proto/services/horoscope/v1/horoscope_pb";
 
-const PORT = 7777;
-const app: Express = express();
+const client = new HoroscopeServiceClient(
+  "localhost:50051",
+  credentials.createInsecure()
+);
 
-app.use(express.json());
+const request: HoroscopeRequest = new HoroscopeRequest();
+request.setName("Mohamed");
+request.setHoroscopeSign("Libra");
 
-app.post("/user", (req: Request, res: Response) => {
-  console.log(req.body);
-});
-
-app.listen(PORT, () => {
-  console.log(`Now listening on port ${PORT}`);
+client.getHoroscopeInfo(request, (err, response) => {
+  if (err) {
+    console.log(err);
+    return;
+  }
+  console.log(response);
 });
