@@ -1,4 +1,8 @@
 # Welcome to the Dark-side (server)
+**Powered by**
+
+<img width="100" alt="buff" src="https://user-images.githubusercontent.com/32971892/206874324-d5e38ea9-04d0-4a12-9481-4034b4dd9fc1.jpg">
+
 
 There are some steps you need to take in order to run the server side code smoothly. 
 
