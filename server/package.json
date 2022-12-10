@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.ts --watch server",
+    "start": "nodemon rpc-request.ts --watch server",
     "proto:build": "cd proto; buf build; cd ..",
     "codegen:buf": "cd proto; buf generate; cd .."
   },
