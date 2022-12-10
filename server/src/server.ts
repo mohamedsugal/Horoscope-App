@@ -6,7 +6,7 @@ const app: Express = express();
 app.use(express.json());
 
 app.post("/user", (req: Request, res: Response) => {
-    console.log(req.body);
+  console.log(req.body);
 });
 
 app.listen(PORT, () => {

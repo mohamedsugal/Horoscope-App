@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon rpc-request.ts --watch server",
+    "build": "rimraf generated-js && npx tsc",
+    "start": "nodemon generated-js/rpc-request.js --watch /src/server",
     "proto:build": "cd proto; buf build; cd ..",
     "codegen:buf": "cd proto; buf generate; cd .."
   },
