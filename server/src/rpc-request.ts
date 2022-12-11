@@ -1,29 +1,55 @@
-import { credentials } from "@grpc/grpc-js";
+import { credentials, ServiceError } from "@grpc/grpc-js";
 import { HoroscopeServiceClient } from "../generated-proto/services/horoscope/v1/horoscope_grpc_pb";
-import { HoroscopeRequest } from "../generated-proto/services/horoscope/v1/horoscope_pb";
+import {
+  HoroscopeRequest,
+  HoroscopeResponse,
+} from "../generated-proto/services/horoscope/v1/horoscope_pb";
+import { Request, Response } from "express";
 
-export class GrpcRequest {
-  
-  public GetGrpcRequest(name:string, horoscopeSign:string) {
-      // Create a stub
-    const client = new HoroscopeServiceClient(
-      "localhost:50051",
-      credentials.createInsecure()
-    );
-    
+class GrpcRequest {
+  private static horoscopeResponse: HoroscopeResponse;
+  private static client: HoroscopeServiceClient = new HoroscopeServiceClient(
+    "localhost:50051",
+    credentials.createInsecure()
+  );
+
+  /**
+   * Sends the HoroscopeRequest to GRPC endpoint
+   * @param request the callback request
+   */
+  public static sendRequest(request: Request) {
     // Implement the HoroscopeRequest that will be sent through the rpc
-    const request: HoroscopeRequest = new HoroscopeRequest();
-    request.setName(name);
-    request.setHoroscopeSign(horoscopeSign);
-    
-    // Make rpc request and receive the response as a callback
-    client.getHoroscopeInfo(request, (err, response) => {
-      if (err) {
-        console.log(err);
-        return;
+    const horoscopeRequest: HoroscopeRequest = new HoroscopeRequest();
+    horoscopeRequest.setName(request.body.name);
+    horoscopeRequest.setHoroscopeSign(request.body.horoscope_sign);
+
+    // Make rpc horoscopeRequest and receive the response as a callback
+    GrpcRequest.client.getHoroscopeInfo(
+      horoscopeRequest,
+      (error: ServiceError | null, horoscopeResponse: HoroscopeResponse) => {
+        if (error) {
+          console.log(error);
+          return;
+        }
+        this.horoscopeResponse = horoscopeResponse;
       }
-      const responseObj = response.toObject();
-      console.log(responseObj);
-    });
+    );
+  }
+
+  // Method to return the GRPC Horoscope response
+  public static getHoroscopeResponse() {
+    console.log(this.horoscopeResponse.toObject());
+    return this.horoscopeResponse.toObject();
+  }
 }
-}
+
+const horoscopeUserDetails = (request: Request, response: Response): any => {
+  GrpcRequest.sendRequest(request);
+  response.status(200).end();
+};
+
+const getHoroscopeDetailsForUser = (req: Request, res: Response): any => {
+  res.status(200).send(GrpcRequest.getHoroscopeResponse());
+};
+
+export { horoscopeUserDetails, getHoroscopeDetailsForUser };
