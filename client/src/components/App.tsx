@@ -14,7 +14,7 @@ function App() {
       horoscope_sign: horoscopeSign,
     };
     axios
-      .post("/user", JSON.stringify(request), {
+      .post("/user-details", JSON.stringify(request), {
         headers: {
           "Content-Type": "application/json",
         },
@@ -33,7 +33,7 @@ function App() {
       <h2 style={{ marginTop: "1em", marginBottom: "20px" }}>Horoscope</h2>
       <Alert variant="primary" className="col-md-6">
         {/* prettier-ignore */}
-        <p>This App Provides horoscope info for sun signs such as Lucky Number, Lucky Color, 
+        <p>This App Provides horoscope info for sun signs such as Lucky Number, Lucky Color,
                     Mood, Color, Compatibility with other sun signs, description of a sign for that day, etc.</p>
         <hr />
         <p>
