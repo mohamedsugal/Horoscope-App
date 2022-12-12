@@ -8,6 +8,7 @@ const app: Express = express();
 app.use(express.json());
 
 app.post("/user-details", grpcRequest.horoscopeUserDetails);
+
 app.get("/horoscope-details", grpcRequest.getHoroscopeDetailsForUser);
 
 // console.log(grpcRequest.getHoroscopeDetailsForUser);

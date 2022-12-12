@@ -20,12 +20,12 @@ class GrpcRequest {
                 console.log(error);
                 return;
             }
+            console.log(horoscopeResponse.toObject());
             this.horoscopeResponse = horoscopeResponse;
         });
     }
     // Method to return the GRPC Horoscope response
     static getHoroscopeResponse() {
-        console.log(this.horoscopeResponse.toObject());
         return this.horoscopeResponse.toObject();
     }
 }

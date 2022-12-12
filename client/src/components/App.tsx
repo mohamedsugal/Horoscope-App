@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Container, Alert, Form, Button, Col, Row } from "react-bootstrap";
 import axios from "axios";
 import "./styles.css";
+import { log } from "util";
 
 function App() {
   const [name, setName] = useState("");
   const [horoscopeSign, setHoroscopeSign] = useState("aries");
+  const [backendData, setBackendData] = useState([{}]);
 
   const flushData = (e: React.ChangeEvent<any>) => {
     e.preventDefault();
@@ -26,7 +28,17 @@ function App() {
     console.log(JSON.stringify(request));
     setName("");
     setHoroscopeSign("aries");
+
+    doGetRequest();
   };
+
+  async function doGetRequest() {
+    let res = await axios.get("/horoscope-details", {
+      headers: { "user-agent": "not axios" },
+    });
+    let data = res.data;
+    console.log(data);
+  }
 
   return (
     <Container>
