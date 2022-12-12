@@ -14,7 +14,9 @@ npm run build           # to generate the JavaScript files
 npm run start           # to start the server
 ```
 
-> Note: `npm run build` is required everytime you make changes to the code in `server/src` directory.
+## Note
+
+**`npm run build`** is required everytime you make changes to the code in `server/src` directory.
 
 ## Learning Resources
 [Node GRPC](https://grpc.io/docs/languages/node/basics/) <br>
