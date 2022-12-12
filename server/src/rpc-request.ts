@@ -45,10 +45,11 @@ class GrpcRequest {
 
 const horoscopeUserDetails = (request: Request, response: Response): any => {
   GrpcRequest.sendRequest(request);
-  response.status(200).end();
+  response.status(200);
 };
 
 const getHoroscopeDetailsForUser = (req: Request, res: Response): any => {
+  console.log("GET request was called");
   res.status(200).send(GrpcRequest.getHoroscopeResponse());
 };
 

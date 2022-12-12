@@ -11,10 +11,8 @@ app.post("/user-details", grpcRequest.horoscopeUserDetails);
 
 app.get("/horoscope-details", grpcRequest.getHoroscopeDetailsForUser);
 
-// console.log(grpcRequest.getHoroscopeDetailsForUser);
-
 app.listen(PORT, () => {
   console.log(`Now listening on port ${PORT}`);
 });
 
-export default app;
+// submit

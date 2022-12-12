@@ -7,7 +7,7 @@
     "build": "rimraf generated-js && npx tsc",
     "start": "nodemon generated-js/server.js",
     "proto:build": "cd proto; buf build; cd ..",
-    "codegen:buf": "rimraf generated-proto && cd proto; buf generate; cd .."
+    "codegen:buf": "cd proto; buf generate; cd .."
   },
   "keywords": [],
   "author": "",

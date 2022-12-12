@@ -7,6 +7,8 @@
 /server/.pnp
 /client/.pnp.js
 /server/.pnp.js
+/server/generated-js
+/server/generated-proto
 
 # testing
 /client/coverage
@@ -38,3 +40,6 @@
 /server/yarn-debug.log*
 /client/yarn-error.log*
 /server/yarn-error.log*
+
+/java-grpc-server/target
+/java-grpc-server/.idea 
