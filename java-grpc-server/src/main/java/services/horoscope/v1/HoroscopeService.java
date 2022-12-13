@@ -57,8 +57,8 @@ public class HoroscopeService extends HoroscopeServiceGrpc.HoroscopeServiceImplB
         "https://sameer-kumar-aztro-v1.p.rapidapi.com/?sign=" + horoscopeSign + "&day=today";
     HttpRequest httpRequest = HttpRequest.newBuilder()
         .uri(URI.create(URL))
-        .header("X-RapidAPI-Key", "12cfb3f027msh601920f06b4be0bp1c051djsnd137ac0e5cfa")
-        .header("X-RapidAPI-Host", "sameer-kumar-aztro-v1.p.rapidapi.com")
+        .header("xxx", "xxx")
+        .header("xxx", "xxx")
         .method("POST", HttpRequest.BodyPublishers.noBody())
         .build();
     HttpResponse<String> httpResponse = HttpClient.newHttpClient()
