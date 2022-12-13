@@ -32,25 +32,32 @@ class GrpcRequest {
           return;
         }
         console.log(horoscopeResponse.toObject());
+        console.log("Java server sent response back");
         this.horoscopeResponse = horoscopeResponse;
       }
     );
   }
 
   // Method to return the GRPC Horoscope response
-  public static getHoroscopeResponse() {
+  public static async getHoroscopeResponse() {
     return this.horoscopeResponse.toObject();
   }
 }
 
 const horoscopeUserDetails = (request: Request, response: Response): any => {
+  console.log("POST request was sent to java");
   GrpcRequest.sendRequest(request);
-  response.status(200);
+  response.status(200).end();
 };
 
+// callback function that works with GET request
 const getHoroscopeDetailsForUser = (req: Request, res: Response): any => {
   console.log("GET request was called");
-  res.status(200).send(GrpcRequest.getHoroscopeResponse());
+  GrpcRequest.getHoroscopeResponse()
+    .then((horoscopeResponse) => {
+      res.status(200).send(horoscopeResponse);
+    })
+    .catch((error) => console.log(error));
 };
 
 export { horoscopeUserDetails, getHoroscopeDetailsForUser };

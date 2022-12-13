@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Container, Alert, Form, Button, Col, Row } from "react-bootstrap";
+import React, { useState } from "react";
+import { Container, Form, Button, Col, Row, Spinner } from "react-bootstrap";
 import axios from "axios";
 import "./styles.css";
 
@@ -7,8 +7,12 @@ function App() {
   const [name, setName] = useState("");
   const [horoscopeSign, setHoroscopeSign] = useState("aries");
   const [backendData, setBackendData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [postedData, setPostedData] = useState(false);
+  const delay = (ms: any) => new Promise((res) => setTimeout(res, ms));
 
-  const flushData = (e: React.ChangeEvent<any>) => {
+  const submitHandler = (e: React.ChangeEvent<any>) => {
+    setPostedData(true);
     e.preventDefault();
     let request = {
       name: name,
@@ -20,7 +24,13 @@ function App() {
           "Content-Type": "application/json",
         },
       })
-      .then((response) => console.log(response))
+      .then((response) => {
+        if (response.status === 200) {
+          console.log("successfully posted to the server!!");
+        } else {
+          console.log("it wasn't successful");
+        }
+      })
       .catch((err) => {
         console.log(err.response.request._response);
       });
@@ -28,41 +38,37 @@ function App() {
     setName("");
     setHoroscopeSign("aries");
 
-    getUserHoroscopeData().then((response) => {
-      if (response != null) {
-        console.log(response.data);
-      }
+    getHoroscopeDetails().then((r) => {
+      setLoading(true);
+      setBackendData(r);
+      console.log(r);
     });
   };
 
-  const getUserHoroscopeData = async () => {
-    try {
-      const res = await axios.get("/horoscope-details");
-      return res;
-    } catch (error) {
-      console.log(error);
-      return null;
+  const showSpinner = () => {
+    if (postedData) {
+      return (
+        <div>
+          <Spinner animation="border" variant="primary" />
+        </div>
+      );
     }
   };
 
+  async function getHoroscopeDetails() {
+    await delay(3000);
+    console.log("Waited 3s");
+    const response = await axios.get("/horoscope-details");
+    return response.data;
+  }
+
   return (
     <Container>
-      <h2 style={{ marginTop: "1em", marginBottom: "20px" }}>Horoscope</h2>
-      <Alert variant="primary" className="col-md-6">
-        {/* prettier-ignore */}
-        <p>This App Provides horoscope info for sun signs such as Lucky Number, Lucky Color,
-                    Mood, Color, Compatibility with other sun signs, description of a sign for that day, etc.</p>
-        <hr />
-        <p>
-          POC: @mohamedsugal, @abdifatahdev
-          <img
-            className={"logo-img"}
-            src={require("../images/logo.png")}
-            alt=""
-          />
-        </p>
-      </Alert>
-      <Form onSubmit={flushData} className="col-md-6">
+      <h2 style={{ marginTop: "1em" }}>
+        <span>Daily </span>Horoscope
+      </h2>
+
+      <Form onSubmit={submitHandler} className="col-md-5">
         <Row className="mb-3">
           <Form.Group as={Col}>
             <Form.Label>Enter your name</Form.Label>
@@ -100,10 +106,15 @@ function App() {
           </Form.Group>
         </Row>
 
-        <Button variant="primary" type="submit">
+        <Button
+          variant="primary"
+          type="submit"
+          style={{ textTransform: "uppercase", fontWeight: "500" }}
+        >
           submit
         </Button>
       </Form>
+      <div>{loading ? JSON.stringify(backendData) : showSpinner()}</div>
     </Container>
   );
 }
