@@ -43,6 +43,7 @@ function App() {
       setBackendData(r);
       console.log(r);
     });
+    setLoading(false);
   };
 
   const showSpinner = () => {
@@ -56,8 +57,8 @@ function App() {
   };
 
   async function getHoroscopeDetails() {
-    await delay(3000);
-    console.log("Waited 3s");
+    await delay(2000);
+    console.log("Waited 2s");
     const response = await axios.get("/horoscope-details");
     return response.data;
   }
