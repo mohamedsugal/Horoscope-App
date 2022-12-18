@@ -9,8 +9,8 @@
   <version>1.0-SNAPSHOT</version>
 
   <properties>
-    <maven.compiler.source>11</maven.compiler.source>
-    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>14</maven.compiler.source>
+    <maven.compiler.target>14</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
@@ -59,8 +59,8 @@
           <protocArtifact>com.google.protobuf:protoc:3.21.11:exe:${os.detected.classifier}</protocArtifact>
           <pluginId>grpc-java</pluginId>
           <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.51.0:exe:${os.detected.classifier}</pluginArtifact>
-<!--          <outputBaseDirectory>target/generated-sources/</outputBaseDirectory>-->
-<!--          <outputDirectory>target/generated-sources/protobuf</outputDirectory>-->
+          <outputBaseDirectory>target/generated-sources/</outputBaseDirectory>
+          <outputDirectory>target/generated-sources/protobuf</outputDirectory>
           <clearOutputDirectory>false</clearOutputDirectory>
         </configuration>
         <executions>
