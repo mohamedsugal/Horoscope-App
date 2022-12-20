@@ -5,7 +5,7 @@
 
 > Buf's goal is to shift API development toward a schema-driven paradigm and thus pave the way for a future in which APIs are defined in a way that service owners and clients can depend on.
 
-There are some steps you need to take in order to run the server side code smoothly. Please do them in order, or you might run into issues.
+There are some steps you need to take in order to run the server code smoothly. Please do them in order, or you might run into issues.
 
 ```shell
 npm install             # to install the dependencies
